@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Учебный портал HTML — практика и анализ</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 20px; background:#f4f6f8;}
+    header {background:#2c3e50; color:white; padding:20px; border-radius:10px;}
+    section {background:white; padding:20px; margin-top:20px; border-radius:10px;}
+    textarea {width:100%; height:180px;}
+    button {padding:10px 15px; margin-top:10px;}
+    iframe {width:100%; height:200px; border:1px solid #ccc;}
+    ul li {margin-bottom:6px;}
+    .error {color:#c0392b;}
+    .ok {color:#27ae60;}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Учебный портал по HTML</h1>
+  <p>Тестирование • Решение проблем • Онлайн-песочница • Анализ ошибок</p>
+</header>
+
+<section>
+  <h2>1. Проблемный вопрос</h2>
+  <p><strong>Почему HTML-страница может открываться у вас, но быть недоступной в интернете?</strong></p>
+  <p>Цель: понять, что HTML — это не только код, но и структура, стандарты и публикация.</p>
+</section>
+
+<section>
+  <h2>2. Онлайн-песочница (HTML)</h2>
+  <p>Введите HTML-код и посмотрите результат:</p>
+  <textarea id="code"><!DOCTYPE html>
+<html>
+<head>
+<title>Моя страница</title>
+</head>
+<body>
+<h1>Привет, HTML!</h1>
+<p>Это учебная страница.</p>
+</body>
+</html></textarea>
+  <br>
+  <button onclick="runCode()">Запустить код</button>
+  <iframe id="result"></iframe>
+</section>
+
+<section>
+  <h2>3. Анализ и поиск ошибок (учебный валидатор)</h2>
+  <p>Этот валидатор не заменяет W3C, но помогает понять типичные ошибки.</p>
+  <button onclick="validateCode()">Проверить код</button>
+  <ul id="errors"></ul>
+</section>
+
+<section>
+  <h2>4. Полезные ресурсы</h2>
+  <ul>
+    <li><a href="https://codepen.io" target="_blank">CodePen — онлайн-песочница</a></li>
+    <li><a href="https://jsfiddle.net" target="_blank">JSFiddle — анализ кода</a></li>
+    <li><a href="https://validator.w3.org" target="_blank">W3C Validator — официальный валидатор</a></li>
+    <li><a href="https://pages.github.com" target="_blank">GitHub Pages — публикация сайта</a></li>
+  </ul>
+</section>
+
+<section>
+  <h2>5. Рефлексия</h2>
+  <p>Ответьте на вопросы:</p>
+  <ul>
+    <li>Что нового вы поняли о структуре HTML?</li>
+    <li>Почему важно проверять код?</li>
+    <li>Как превратить HTML-файл в сайт?</li>
+  </ul>
+</section>
+
+<script>
+function runCode() {
+  const iframe = document.getElementById('result');
+  const code = document.getElementById('code').value;
+  iframe.srcdoc = code;
+}
+
+function validateCode() {
+  const code = document.getElementById('code').value;
+  const errors = document.getElementById('errors');
+  errors.innerHTML = '';
+
+  if (!code.includes('<!DOCTYPE html>')) {
+    addError('Отсутствует DOCTYPE. Браузер может неправильно интерпретировать страницу.');
+  }
+  if (!code.includes('<html')) {
+    addError('Отсутствует тег <html>. Страница не имеет корневого элемента.');
+  }
+  if (!code.includes('<head>')) {
+    addError('Отсутствует тег <head>.');
+  }
+  if (!code.includes('<body>')) {
+    addError('Отсутствует тег <body>.');
+  }
+  if (errors.children.length === 0) {
+    const li = document.createElement('li');
+    li.textContent = 'Ошибок не найдено. Структура HTML корректна.';
+    li.className = 'ok';
+    errors.appendChild(li);
+  }
+}
+
+function addError(text) {
+  const li = document.createElement('li');
+  li.textContent = text;
+  li.className = 'error';
+  document.getElementById('errors').appendChild(li);
+}
+</script>
+
+</body>
+</html>
